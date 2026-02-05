@@ -1,0 +1,135 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* ===== Page layout ===== */
+
+body {
+  margin: 50px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+body > p {
+  width: 1100px;
+  max-width: 100%;
+  margin-bottom: 12px;
+  text-align: right;
+}
+
+/*h1 {
+  width: 1100px;
+  max-width: 100%;
+  text-align: left;
+}*/
+
+/* HR도 본문 폭에 맞추고 싶으면 */
+hr {
+  width: 1100px;
+  max-width: 100%;
+  margin: 12px 0 16px;
+  border: 0;
+  border-top: 1px solid #000;
+}
+
+/* ===== Tabs ===== */
+.tabs {
+  width: 1100px;
+  max-width: 100%;
+  display: flex;
+  gap: 10px;
+  margin: 0 0 16px 0;
+}
+
+.tab {
+  border: 1px solid #000;
+  background: transparent;
+  padding: 6px 10px;
+  cursor: pointer;
+  font: inherit;
+}
+
+.tab.is-active {
+  background: #000;
+  color: #fff;
+}
+
+/* ===== Dashboard wrapper ===== */
+.dashwrap {
+  width: 1100px;
+  max-width: 100%;
+}
+
+/* 탭 전환(숨김/표시) */
+.dashboard {
+  visibility: hidden;
+  position: absolute;
+  left: -99999px;
+  top: 0;
+}
+
+.dashboard.is-active {
+  visibility: visible;
+  position: static;
+  left: auto;
+}
+
+/* 프레임(테두리): 내용 크기만큼 감싸되, 탭2는 height 보정이 필요 */
+.viz-frame {
+  border: 1px solid #000;
+  display: inline-block;
+  background: #fff;
+}
+
+/* Tableau 내부에서 생기는 기본 border 제거 (겹침 방지) */
+.tableauPlaceholder,
+.tableauPlaceholder iframe,
+.tableauPlaceholder object {
+  border: 0 !important;
+}
+
+/* ===== Tableau: Tab 1 (1200 x 1027) =====
+   Tableau가 object -> iframe으로 바꾸는 경우가 많아서 둘 다 잡아준다.
+*/
+#dash-1 .tableauPlaceholder {
+  width: 1100px !important;
+}
+
+#dash-1 .tableauPlaceholder iframe,
+#dash-1 .tableauPlaceholder object,
+#dash-1 .tableauPlaceholder .tableauViz {
+  width: 1100px !important;
+  height: 1027px !important;
+}
+
+/* ===== Tableau: Tab 2 (1600 x 1227) scaled to 1200 width ===== */
+#dash-2 .viz-frame {
+  width: 1100px;
+  height: calc(1227px * 0.6875); /* 920.25px */
+  overflow: hidden;
+}
+
+/* 원본을 그대로 렌더링(1600x1227)한 뒤, placeholder에서 축소 */
+#dash-2 .tableauPlaceholder {
+  width: 1600px !important;
+  height: 1227px !important;
+
+  transform: scale(0.6875);
+  transform-origin: top left;
+}
+
+#dash-2 .tableauPlaceholder iframe,
+#dash-2 .tableauPlaceholder object,
+#dash-2 .tableauPlaceholder .tableauViz {
+  width: 1600px !important;
+  height: 1227px !important;
+}
+
+
+#dash-1 .tableauPlaceholder > div { width: 1100px !important; }
+
+
+

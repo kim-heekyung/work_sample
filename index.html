@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Work Sample</title>
+	<meta name="description" content="설명">
+	<meta name="keywords" content="키워드1, 키워드2">
+	<meta property="og:image" content="">
+	<meta name="viewport" content="width=device-width, user-scalable=no">
+	<link rel="stylesheet" href="style.css">
+	<link rel="icon" type="image/png" href="">
+
+</head>
+<body>
+
+
+<h1>Work Sample</h1>
+<p><br>By Tableau<br>Using dummy data</p>
+
+<hr>
+
+<nav class="tabs" aria-label="Dashboard tabs">
+  <button class="tab is-active" type="button" data-target="#dash-1">sample 1</button>
+  <button class="tab" type="button" data-target="#dash-2">sample 2</button>
+</nav>
+
+<section class="dashwrap">
+  <!-- Dashboard 1 -->
+  <div id="dash-1" class="dashboard is-active">
+  	<div class="viz-frame">
+    <div class="tableauPlaceholder" id="viz1" style="position: relative;">
+      <noscript>
+        <a href="#">
+          <img alt="이탈기준 설정"
+               src="https://public.tableau.com/static/images/_1/_16645283898440/sheet0/1_rss.png"
+               style="border: none;" />
+        </a>
+      </noscript>
+      <object class="tableauViz" style="display:none;">
+        <param name="host_url" value="https%3A%2F%2Fpublic.tableau.com%2F" />
+        <param name="embed_code_version" value="3" />
+        <param name="site_root" value="" />
+        <param name="name" value="_16645283898440/sheet0" />
+        <param name="tabs" value="no" />
+        <param name="toolbar" value="yes" />
+        <param name="static_image" value="https://public.tableau.com/static/images/_1/_16645283898440/sheet0/1.png" />
+        <param name="animate_transition" value="yes" />
+        <param name="display_static_image" value="yes" />
+        <param name="display_spinner" value="yes" />
+        <param name="display_overlay" value="yes" />
+        <param name="display_count" value="yes" />
+        <param name="language" value="en-US" />
+      </object>
+    </div>
+	</div>
+  </div>
+
+  <!-- Dashboard 2 -->
+  <div id="dash-2" class="dashboard">
+  	<div class="viz-frame">
+    <div class="tableauPlaceholder" id="viz2" style="position: relative;">
+      <noscript>
+        <a href="#">
+          <img alt="거래소 활성화 지수"
+               src="https://public.tableau.com/static/images/__/__16636335199090/sheet0/1_rss.png"
+               style="border: none;" />
+        </a>
+      </noscript>
+      <object class="tableauViz" style="display:none;">
+        <param name="host_url" value="https%3A%2F%2Fpublic.tableau.com%2F" />
+        <param name="embed_code_version" value="3" />
+        <param name="site_root" value="" />
+        <param name="name" value="__16636335199090/sheet0" />
+        <param name="tabs" value="no" />
+        <param name="toolbar" value="yes" />
+        <param name="static_image" value="https://public.tableau.com/static/images/__/__16636335199090/sheet0/1.png" />
+        <param name="animate_transition" value="yes" />
+        <param name="display_static_image" value="yes" />
+        <param name="display_spinner" value="yes" />
+        <param name="display_overlay" value="yes" />
+        <param name="display_count" value="yes" />
+        <param name="language" value="en-US" />
+      </object>
+    </div>
+	</div>
+  </div>
+</section>
+
+<script src="https://public.tableau.com/javascripts/api/viz_v1.js"></script>
+
+<script>
+  const tabs = document.querySelectorAll(".tab");
+  const dashboards = document.querySelectorAll(".dashboard");
+
+  tabs.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const target = btn.getAttribute("data-target");
+
+      dashboards.forEach(d => d.classList.remove("is-active"));
+      tabs.forEach(t => t.classList.remove("is-active"));
+
+      document.querySelector(target)?.classList.add("is-active");
+      btn.classList.add("is-active");
+
+      window.dispatchEvent(new Event("resize"));
+    });
+  });
+</script>
+
+
+
+</body>
+</html>
