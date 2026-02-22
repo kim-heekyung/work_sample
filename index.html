@@ -94,45 +94,42 @@
   const tabs = document.querySelectorAll(".tab");
   const dashboards = document.querySelectorAll(".dashboard");
 
+  function activateTabByTarget(target) {
+    dashboards.forEach(d => d.classList.remove("is-active"));
+    tabs.forEach(t => t.classList.remove("is-active"));
+
+    document.querySelector(target)?.classList.add("is-active");
+    document.querySelector(`.tab[data-target="${target}"]`)?.classList.add("is-active");
+
+    window.dispatchEvent(new Event("resize"));
+  }
+
   tabs.forEach((btn) => {
     btn.addEventListener("click", () => {
       const target = btn.getAttribute("data-target");
 
-      dashboards.forEach(d => d.classList.remove("is-active"));
-      tabs.forEach(t => t.classList.remove("is-active"));
+      activateTabByTarget(target);
 
-      document.querySelector(target)?.classList.add("is-active");
-      btn.classList.add("is-active");
+      // ✅ 추가: URL에 해시 반영 (탭 바로가기 링크 생성)
       history.replaceState(null, "", target);
-
-      window.dispatchEvent(new Event("resize"));
     });
   });
 
-  function activateTabByTarget(target) {
-  dashboards.forEach(d => d.classList.remove("is-active"));
-  tabs.forEach(t => t.classList.remove("is-active"));
-
-  document.querySelector(target)?.classList.add("is-active");
-  document.querySelector(`.tab[data-target="${target}"]`)?.classList.add("is-active");
-
-  window.dispatchEvent(new Event("resize"));
-  }
-
   function activateFromHash() {
-    const hash = window.location.hash; // 예: "#dash-2"
+    const hash = window.location.hash; // "#dash-1" or "#dash-2"
     if (hash && document.querySelector(hash)) {
       activateTabByTarget(hash);
+      // (선택) 버튼 클릭으로 들어온 게 아니라도 URL 정리
+      history.replaceState(null, "", hash);
     }
   }
 
-  // 첫 로드 시 해시 반영
+  // ✅ 추가: 첫 로드 때 해시 있으면 해당 탭 열기
   activateFromHash();
 
-  // 해시가 바뀌면(뒤로가기/앞으로가기 포함) 반영
+  // ✅ 추가: 해시 변경 시(뒤로/앞으로 포함) 반영
   window.addEventListener("hashchange", activateFromHash);
-
-</script>
+  </script>
 
 
 
