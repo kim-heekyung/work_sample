@@ -103,11 +103,37 @@
 
       document.querySelector(target)?.classList.add("is-active");
       btn.classList.add("is-active");
+      history.replaceState(null, "", target);
 
       window.dispatchEvent(new Event("resize"));
     });
   });
+
+  function activateTabByTarget(target) {
+  dashboards.forEach(d => d.classList.remove("is-active"));
+  tabs.forEach(t => t.classList.remove("is-active"));
+
+  document.querySelector(target)?.classList.add("is-active");
+  document.querySelector(`.tab[data-target="${target}"]`)?.classList.add("is-active");
+
+  window.dispatchEvent(new Event("resize"));
+  }
+
+  function activateFromHash() {
+    const hash = window.location.hash; // 예: "#dash-2"
+    if (hash && document.querySelector(hash)) {
+      activateTabByTarget(hash);
+    }
+  }
+
+  // 첫 로드 시 해시 반영
+  activateFromHash();
+
+  // 해시가 바뀌면(뒤로가기/앞으로가기 포함) 반영
+  window.addEventListener("hashchange", activateFromHash);
+
 </script>
+
 
 
 
